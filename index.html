@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<!-- UNEF -->
+<html lang="pt-br" ng-app="app">
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- CSS PERSONALIZADO -->
+        <link rel="stylesheet" type="text/css" href="lib/css/style.css">
+
+        <!-- CSS BOOTSTRAP  -->
+        <!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css"> -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+        <!-- CSS MATERIAL -->
+        <link rel="stylesheet" href="lib/css/angular-material.min.css">
+
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+        <script  src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+        <!-- ANGULAR JS -->
+        <script src="lib/js/angular/angular.min.js"></script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+
+        <!-- Angular Material Library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+        <script src="lib/js/controller.js"></script>
+        <script src="lib/js/ngmask.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
+
+        <title>Consulta de Diploma</title>
+
+    </head>
+
+    <loading></loading>
+    <body ng-controller="appCtrl">
+      <!-- <div ng-if="sucesso == 1" class="alert alert-success" role="alert">Seus dados foram enviados, obrigado por preencher o formulário!</div> -->
+        <div class="container" style="max-width: 800px;">
+   <div id="contact">
+   
+    <h3 style="text-align: center;">Consulta de Diploma<br><p></p></h3>
+
+    <!-- <h4>Deixe sua sugestão</h4> -->
+
+    <form>
+    <div class="form-row" ng-show="exibir">
+        <div class="col">
+          <input class="form-control" placeholder="CPF" tabindex="1" autofocus ng-model="cpf" mask="999.999.999-99">
+          <div style="text-align: center;">{{mensagem_retorno}}</div>
+        </div>
+    </div>
+    <hr ng-show="exibir">
+    <div class="container" ng-show="!exibir"> 
+  <div class="row" ng-repeat="dado in dados">
+    <div class="col-md-12">
+     <h3><i class="fas fa-user"></i> Dados pessoais</h3> 
+    </div>
+
+    <div class="col-md-12">
+      Nome: <p>{{dado.NOME_ALUNO_DIPLOMADO}}</p>
+    </div>
+    <div class="col-md-12" >
+      CPF: <p>{{dado.CPF_ALUNO}}</p>
+    </div>
+
+    <div class="col-md-12">
+     <h3><i class="fas fa-graduation-cap"></i> E-Mec</h3> 
+    </div>
+
+    <div class="col-md-6" >
+      <p>Curso Superior: {{dado.CURSO_ENSINO_SUPERIOR}}</p>
+    </div>
+    <div class="col-md-6" >
+      <p>IES Expedidora: {{dado.NOME_IES_EXPEDIDORA}}</p>
+    </div>
+    <div class="col-md-6" >
+      <p>IES Registradora: {{dado.CODIGO_EMEC_IES_REGISTRADORA}} - {{dado.NOME_IES_REGISTRADORA}}</p>
+    </div>
+    
+
+    <div class="col-md-12">
+     <h3><i class="fas fa-school"></i> Curso e Diploma</h3> 
+    </div>
+
+
+    <div class="col-md-6" >
+      <p>Ingresso no Curso: {{dado.DTINGRESSO}}</p>
+    </div>
+    
+    <div class="col-md-6" >
+      <p>Conclusão do Curso: {{dado.DTCONCLUSAOCURSO}}</p>
+    </div>
+
+    <div class="col-md-6" >
+      <p>Expedição do Diploma: {{dado.DATA_EXPEDICAO_DIPLOMA}}</p>
+    </div>
+    
+    <div class="col-md-6" >
+      <p>Registro do Diploma: {{dado.DATA_REGISTRO_DIPLOMA}}</p>
+    </div>
+
+    <div class="col-md-6" >
+      <p>Número da Expedição: {{dado.IDENTIFICACAO_NUMERO_EXPEDICAO}}</p>
+    </div>
+
+    <div class="col-md-6" >
+      <p>Número do Registro: {{dado.IDENTIFICACAO_NUMERO_REGISTRO}}</p>
+    </div>
+
+    <!-- <div class="col-md-12" >
+     <p>Informações do registro publicadas no dia {{dado.}} no DOU.</p>
+    </div> -->
+    <button id="contact-submit" ng-click="resetarDados()" ng-show="!exibir">Voltar</button>
+  </div>
+</div>
+   
+    
+      <button id="contact-submit" ng-click="buscarDados(cpf)" ng-disabled="!cpf" ng-show="exibir">Buscar</button>
+      
+    
+</form>
+  </div>
+</div>
+
+
+<!-- <nav class="navbar fixed-bottom navbar-light bg-light" style="background-color: #f2f2f2 !important;"> -->
+  <!-- <a class="navbar-brand" href="http://unefead.com.br/">
+    <img src="lib/img/nobre.png" height="35" alt="">
+  </a> -->
+  <!-- Contato: (75) 2102-9500  -->
+<!-- </nav>
+ -->    </body>
+</html>
